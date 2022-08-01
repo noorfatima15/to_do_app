@@ -10,24 +10,22 @@ class List_view extends StatelessWidget {
   TaskController taskController = Get.put(TaskController());
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Obx(() => ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: taskController.taskList.length,
-              itemBuilder: (context, index) {
-                Task task = taskController.taskList[index];
+    return Obx(
+      () => ListView.builder(
+        // physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: taskController.taskList.length,
+        itemBuilder: (context, index) {
+          Task task = taskController.taskList[index];
 
-                return TaskTile(
-                  subtitle: task.title,
-                  title: task.subtitle,
-                  index: index,
-                  task: task,
-                );
-              },
-            )),
-      ],
+          return TaskTile(
+            subtitle: task.title,
+            title: task.subtitle,
+            index: index,
+            task: task,
+          );
+        },
+      ),
     );
   }
 }
