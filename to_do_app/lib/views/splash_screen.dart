@@ -27,21 +27,27 @@ class _SplashScreenState extends State<SplashScreen> {
         height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                stops: [
-                  0.1,
-                  0.4,
-                  0.6,
-                  0.9,
-                ],
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  Colors.yellow,
-                  Colors.red,
-                  Colors.deepOrange,
-                  Colors.orangeAccent,
-                ])),
+          image: DecorationImage(
+              image: AssetImage(
+                'assets/images/background.jpg',
+              ),
+              fit: BoxFit.cover),
+          // gradient: LinearGradient(
+          //     stops: [
+          //       0.1,
+          //       0.4,
+          //       0.6,
+          //       0.9,
+          //     ],
+          //     begin: Alignment.topRight,
+          //     end: Alignment.bottomLeft,
+          //     colors: [
+          //       Colors.yellow,
+          //       Colors.red,
+          //       Colors.deepOrange,
+          //       Colors.orangeAccent,
+          //     ])
+        ),
         child: Column(
           children: [
             SizedBox(height: 350),
@@ -56,8 +62,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             SizedBox(height: 100),
             CircularProgressIndicator(
-              valueColor:
-                  new AlwaysStoppedAnimation<Color>(Colors.orangeAccent),
+              valueColor: new AlwaysStoppedAnimation<Color>(Colors.grey),
             )
           ],
         ),

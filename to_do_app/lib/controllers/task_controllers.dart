@@ -1,12 +1,21 @@
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../models/task.dart';
 
 class TaskController extends GetxController {
   RxList<Task> taskList = <Task>[].obs;
-  RxString dropDownActivity = "Activity1".obs;
-  var listOfActivities = <String>['Activity1', 'Activity2', 'Activity3'];
+  RxString dropDownActivity = "Buisness".obs;
+  var listOfActivities = <String>['Buisness', 'Plan', 'Study'];
+
+  RxString userNAme = ''.obs;
+
+  void addUser(String username) {
+    userNAme.value = username;
+
+    //  return userNAme;
+    update();
+    refresh();
+  }
 
   void selectActivity(String activity) {
     dropDownActivity.value = activity;
@@ -14,13 +23,13 @@ class TaskController extends GetxController {
 
   String activityImage(Task task) {
     switch (task.activity) {
-      case 'Activity1':
-        return 'https://icons.veryicon.com/png/o/education-technology/passenger-flow-analysis-icon-library/activity-assessment.png';
-      case 'Activity2':
-        return 'https://www.pngitem.com/pimgs/m/666-6669907_social-activity-activities-icon-png-download-social-activities.png';
+      case 'Buisness':
+        return 'https://thumbs.dreamstime.com/b/dollars-suitcase-business-icon-vector-sign-symbol-isolated-white-background-logo-concept-your-web-mobile-app-design-134169376.jpg';
+      case 'Plan':
+        return 'https://t3.ftcdn.net/jpg/03/25/95/40/360_F_325954032_NyePptbkaDbkB0CLr1G4B61Z1g6JCNOQ.jpg';
       case 'Activity3':
       default:
-        return '';
+        return 'https://cdn.icon-icons.com/icons2/2474/PNG/512/ingenuity_wit_book_idea_light_bulb_learn_learning_icon_149691.png';
     }
   }
 

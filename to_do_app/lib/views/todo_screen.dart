@@ -5,12 +5,18 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do_app/controllers/navigation_controller.dart';
+import 'package:to_do_app/controllers/task_controllers.dart';
+
 import 'package:to_do_app/views/add_task_screen.dart';
 import 'package:timer_builder/timer_builder.dart';
+import 'package:to_do_app/views/create_user.dart';
 import 'package:to_do_app/widgets/task_list.dart';
 
 class TodoScreen extends StatelessWidget {
-  TodoScreen({Key? key}) : super(key: key);
+  TodoScreen({
+    Key? key,
+  }) : super(key: key);
+
   List<String> sliderImages = [
     'https://iso.500px.com/wp-content/uploads/2014/06/W4A2827-1-3000x2000.jpg',
     'https://static.photocdn.pt/images/articles/2019/02/07/Simple_Landscape_Photography_Tips_With_Tons_of_Impact-2.jpg',
@@ -20,6 +26,7 @@ class TodoScreen extends StatelessWidget {
     'https://static.photocdn.pt/images/articles/2018/12/03/articles/2017_8/mountain-landscape-ponta-delgada-island-azores-picture-id944812540.jpg',
     'https://wallpaperaccess.com/full/94472.jpg',
   ];
+  final TaskController taskController = Get.put(TaskController());
 
   @override
   String getSystemTime() {
@@ -29,6 +36,7 @@ class TodoScreen extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: Container(
         height: double.infinity,
         width: double.infinity,
@@ -42,6 +50,33 @@ class TodoScreen extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
+              Row(
+                children: [
+                  SizedBox(width: 50),
+                  Container(
+                    height: 50,
+                    width: 160,
+                    child: Obx(() => Text.rich(TextSpan(
+                            text: 'Hello!\n',
+                            style: TextStyle(color: Colors.white),
+                            children: <InlineSpan>[
+                              TextSpan(
+                                text: taskController.userNAme.value,
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                            ]))),
+                  ),
+                  SizedBox(width: 20),
+                  ElevatedButton(
+                      onPressed: () {
+                        Get.to(AddUser());
+                      },
+                      child: Text('Add User'))
+                ],
+              ),
               Container(
                 height: 200,
                 width: 350,
@@ -62,13 +97,20 @@ class TodoScreen extends StatelessWidget {
                         reverse: true)),
               ),
               SizedBox(height: 10),
-              Container(
-                height: 480,
-                width: 320,
-                decoration:
-                    BoxDecoration(color: Colors.white38.withOpacity(0.1)),
+              Column(
+                children: [
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Container(
+                      height: 430,
+                      width: 320,
+                      decoration:
+                          BoxDecoration(color: Colors.white38.withOpacity(0.2)),
+                      child: List_view(),
+                    ),
+                  ),
+                ],
               ),
-              List_view(),
             ],
           ),
         ),
@@ -93,15 +135,20 @@ class TodoScreen extends StatelessWidget {
             SizedBox(height: 30),
             Container(
               height: 60,
-              width: 150,
-              color: Colors.black45.withOpacity(0.3),
+              width: 160,
+              decoration: BoxDecoration(
+                color: Colors.black45.withOpacity(
+                  0.3,
+                ),
+                borderRadius: BorderRadius.circular(12),
+              ),
               child: Center(
                 child: TimerBuilder.periodic(Duration(seconds: 1),
                     builder: (context) {
                   return Text(
                     "${getSystemTime()}",
                     style: TextStyle(
-                      color: Color(0xff2d386b),
+                      color: Color(0xffb6b8cc),
                       fontSize: 25,
                       fontWeight: FontWeight.w500,
                     ),
