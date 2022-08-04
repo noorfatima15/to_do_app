@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../models/task.dart';
@@ -6,13 +5,16 @@ import '../models/task.dart';
 class TaskController extends GetxController {
   RxList<Task> taskList = <Task>[].obs;
   RxString dropDownActivity = "Buisness".obs;
-  var listOfActivities = <String>['Buisness', 'Plan', 'Activity3'];
+  var listOfActivities = <String>['Buisness', 'Plan', 'Study'];
 
   RxString userNAme = ''.obs;
 
   void addUser(String username) {
-    userNAme = username.obs;
+    userNAme.value = username;
+
+    //  return userNAme;
     update();
+    refresh();
   }
 
   void selectActivity(String activity) {

@@ -1,7 +1,7 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// import 'package:flutter/cupertino.dart';
 
 class StopwatchScreen extends StatefulWidget {
   @override
@@ -68,7 +68,7 @@ class _StopwatchScreenState extends State<StopwatchScreen> {
                   ),
                 ),
                 SizedBox(height: 40),
-                CupertinoButton(
+                MaterialButton(
                   onPressed: () {
                     handleStartStop();
                   },
@@ -97,7 +97,7 @@ class _StopwatchScreenState extends State<StopwatchScreen> {
                 SizedBox(
                   height: 15,
                 ),
-                CupertinoButton(
+                MaterialButton(
                   onPressed: () {
                     stopwatch.reset();
                   },

@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do_app/controllers/navigation_controller.dart';
+import 'package:to_do_app/controllers/task_controllers.dart';
 
 import 'package:to_do_app/views/add_task_screen.dart';
 import 'package:timer_builder/timer_builder.dart';
@@ -12,7 +13,9 @@ import 'package:to_do_app/views/create_user.dart';
 import 'package:to_do_app/widgets/task_list.dart';
 
 class TodoScreen extends StatelessWidget {
-  TodoScreen({Key? key}) : super(key: key);
+  TodoScreen({
+    Key? key,
+  }) : super(key: key);
 
   List<String> sliderImages = [
     'https://iso.500px.com/wp-content/uploads/2014/06/W4A2827-1-3000x2000.jpg',
@@ -23,6 +26,7 @@ class TodoScreen extends StatelessWidget {
     'https://static.photocdn.pt/images/articles/2018/12/03/articles/2017_8/mountain-landscape-ponta-delgada-island-azores-picture-id944812540.jpg',
     'https://wallpaperaccess.com/full/94472.jpg',
   ];
+  final TaskController taskController = Get.put(TaskController());
 
   @override
   String getSystemTime() {
@@ -52,18 +56,18 @@ class TodoScreen extends StatelessWidget {
                   Container(
                     height: 50,
                     width: 160,
-                    child: Text.rich(TextSpan(
-                        text: 'Hello!\n',
-                        style: TextStyle(color: Colors.white),
-                        children: <InlineSpan>[
-                          TextSpan(
-                            text: 'User',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          )
-                        ])),
+                    child: Obx(() => Text.rich(TextSpan(
+                            text: 'Hello!\n',
+                            style: TextStyle(color: Colors.white),
+                            children: <InlineSpan>[
+                              TextSpan(
+                                text: taskController.userNAme.value,
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                            ]))),
                   ),
                   SizedBox(width: 20),
                   ElevatedButton(
